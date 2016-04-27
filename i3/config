@@ -11,9 +11,19 @@
 
 set $mod Mod4
 
+# Colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Terminus Bold Semi-Condensed 11px
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -170,7 +180,7 @@ bar {
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
-bindsym $mod+minus scratchpad show
+bindsym F12 scratchpad show
 
 # Lock screen
 bindsym $mod+shift+x exec i3lock
@@ -185,7 +195,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec /home/ylazaryev/bin/toggletouchpad.sh # toggle touchpad
+bindsym XF86TouchpadToggle exec ~/bin/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -211,11 +221,23 @@ exec ~/bin/Telegram
 assign [class="Telegram"] $ws4
 
 # wallpaper
-exec_always feh --bg-scale ~/Pictures/Wallpapers/current_wallpaper
+set $wallpaper ~/Pictures/Wallpapers/current_wallpaper.png
+exec_always feh --bg-scale $wallpaper
+
+# mouse
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+
+# When holding the floating modifier, you can resize a floating window 
+# by pressing the right mouse button on it and moving around while holding it. 
+# If you hold the shift button as well, the resize will be proportional 
+# (the aspect ratio will be preserved).
+
+floating_modifier Mod1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock, mode "default"
+    bindsym l exec --no-startup-id i3lock -c 000000, mode "default"
     bindsym e exec --no-startup-id systemctl logout, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
