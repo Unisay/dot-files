@@ -204,8 +204,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # startup
-setxkbmap -layout us,ru
-setxkbmap -option 'grp:alt_space_toggle'
+exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_space_toggle"
 
 exec xcompmgr -c -f -n
 
