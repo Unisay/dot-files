@@ -119,6 +119,9 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym $mod+Mod1+Left workspace prev
+bindsym $mod+Mod1+Right workspace next
+
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -205,9 +208,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # startup
 exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_space_toggle"
-
+exec ~/bin/toggletouchpad.sh
 exec xcompmgr -c -f -n
-
 exec roxterm 
 
 exec firefox
@@ -218,6 +220,9 @@ assign [class="Xfe"] $ws2
 
 exec ~/bin/Telegram
 assign [class="Telegram"] $ws4
+
+exec skype
+assign [class="Skype"] $ws4
 
 # wallpaper
 set $wallpaper ~/Pictures/Wallpapers/current_wallpaper.png
