@@ -13,10 +13,13 @@ set $mod Mod4
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused          #007fbf #007fbf #ffffff
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.unfocused        #666666 #666666 #ffffff
+# client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.urgent           #aa0000 #990000 #fffff
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
@@ -41,7 +44,7 @@ floating_modifier $mod
 
 # start a terminal
 # i3-sensible-terminal
-bindsym $mod+Return exec roxterm
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -107,13 +110,14 @@ set $ws1 "1:Terminals "
 set $ws2 "2:File Manager "
 set $ws3 "3:Browser "
 set $ws4 "4:Messaging "
+set $ws5 "5:IDE "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace 5
+bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -122,13 +126,14 @@ bindsym $mod+0 workspace 10
 bindsym $mod+Mod1+Left workspace prev
 bindsym $mod+Mod1+Right workspace next
 
+workspace_auto_back_and_forth yes
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -176,7 +181,9 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
         tray_output primary
-        font xft:Droid Sans Mono, FontAwesome 10
+	font pango: Monospace 8, FontAwesome 10
+	separator_symbol ""
+
 }
 
 # Make the currently focused window a scratchpad
@@ -210,7 +217,7 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_space_toggle"
 exec ~/bin/toggletouchpad.sh
 exec xcompmgr -c -f -n
-exec roxterm 
+exec gnome-terminal
 
 exec firefox
 assign [class="Firefox"] $ws3
@@ -225,7 +232,7 @@ exec skype
 assign [class="Skype"] $ws4
 
 # wallpaper
-set $wallpaper ~/Pictures/Wallpapers/current_wallpaper.png
+set $wallpaper ~/Pictures/Wallpapers/current_wallpaper
 exec_always feh --bg-scale $wallpaper
 
 # mouse
