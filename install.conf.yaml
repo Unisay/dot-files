@@ -1,0 +1,14 @@
+# https://github.com/anishathalye/dotbot#full-example
+
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.ghci: .ghci
+    ~/.vim: .vim
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
